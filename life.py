@@ -23,3 +23,13 @@ def nextgen(arr, periodic=True):
     arr[c == 3] = 1 # 繁殖 or 生存
     arr[c >= 4] = 0 # 過密
     return arr
+
+
+def main():
+    arr = np.random.randint(0, 2, [10, 10], dtype=np.uint8)
+    print(arr)
+    arr = nextgen(arr)
+    print(arr)
+
+if __name__ == '__main__':
+    main()
