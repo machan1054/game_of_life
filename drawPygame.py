@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-import life
+import lifeCore
 import cv2
 
 
