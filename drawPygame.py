@@ -36,7 +36,7 @@ class LifeGUI():
     def run(self):
         while self.play:
             self.gen += 1
-            self.arr = life.nextgen(self.arr)
+            self.arr = lifeCore.nextgen(self.arr)
             self.draw()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
