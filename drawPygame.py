@@ -1,7 +1,7 @@
 import pygame
 import numpy as np
 import life
-from PIL import Image
+import cv2
 
 
 class LifeGUI():
@@ -24,10 +24,11 @@ class LifeGUI():
 
     def draw(self):
         pygame.display.set_caption(self.title.format(self.gen))
-        p_img = Image.fromarray(self.arr * 255).convert('RGB')
         if self.m != 1:
-            resample = Image.NEAREST if 1 < self.m else Image.BICUBIC
-            p_img = p_img.resize((self.w, self.h), resample=resample)
+            p_img = cv2.resize(self.arr, (self.w, self.h))
+        else:
+            p_img = self.arr
+        p_img = cv2.cvtColor(p_img * 255, cv2.COLOR_GRAY2RGB)
         self.pg_img = pygame.image.frombuffer(p_img.tobytes(), (self.w, self.h), 'RGB')
         self.screen.blit(self.pg_img, (0, 0))
         pygame.display.update() #描画処理を実行
@@ -46,7 +47,7 @@ class LifeGUI():
 
 
 def main():
-    size = [1000, 1000]
+    size = [1200, 800]
     arr = np.random.randint(0, 2, [size[1], size[0]], dtype=np.uint8)
     gui = LifeGUI(array=arr, magnification=1, fps=60)
     gui.run()
