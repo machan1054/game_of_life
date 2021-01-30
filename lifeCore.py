@@ -19,7 +19,16 @@ def nextgen(arr, periodic=True):
     c = cv2.filter2D(target_arr, -1, kernel, borderType=cv2.BORDER_CONSTANT)
     if periodic:
         c = c[1:-1, 1:-1]
-    arr[c <= 1] = 0 # 過疎
-    arr[c == 3] = 1 # 繁殖 or 生存
-    arr[c >= 4] = 0 # 過密
+    arr[(c <= 1) | (c >= 4)] = 0 # 死
+    arr[c == 3] = 1 # 誕生 or 生存
     return arr
+
+
+def main():
+    arr = np.random.randint(0, 2, [10, 10], dtype=np.uint8)
+    print(arr)
+    arr = nextgen(arr)
+    print(arr)
+
+if __name__ == '__main__':
+    main()
