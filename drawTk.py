@@ -1,7 +1,7 @@
 
 from PIL import Image, ImageTk
 import tkinter as tk
-import life
+import lifeCore
 
 
 
@@ -38,7 +38,7 @@ class LifeGUI(tk.Frame):
 
 
     def update(self):
-        self.arr = life.nextgen(self.arr)
+        self.arr = lifeCore.nextgen(self.arr)
         self.draw()
         if self.play:
             self.after(round(1000/self.fps), self.update)
